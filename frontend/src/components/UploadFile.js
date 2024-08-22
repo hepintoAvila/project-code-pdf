@@ -1,38 +1,39 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function UploadFile() {
-  const [file, setFile] = useState(null);
-  const [message, setMessage] = useState('');
+const FileUpload = () => {
+    const [file, setFile] = useState(null);
+    const [message, setMessage] = useState('');
 
-  const onFileChange = (e) => {
-    setFile(e.target.files[0]);
-  };
+    const onFileChange = event => {
+        setFile(event.target.files[0]);
+    };
 
-  const onFileUpload = async () => {
-    const formData = new FormData();
-    formData.append('pdf', file);
+    const onFileUpload = async () => {
+        const formData = new FormData();
+        formData.append('pdf', file);
 
-    try {
-      const response = await axios.post('/api/pdf/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      setMessage(`File uploaded successfully! MD5: ${response.data.md5Hash}`);
-    } catch (error) {
-      setMessage('Failed to upload file');
-    }
-  };
+        try {
+            const response = await axios.post('http://localhost:5000/api/pdf/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            
+            setMessage(`Generado y guardada la información con exito! MD5: ${response.data.md5Hash}`);
+        } catch (error) {
+            console.error('Error uploading file:', error);
+            setMessage('Failed to upload file');
+        }
+    };
 
-  return (
-    <div>
-      <h2>Upload PDF</h2>
-      <input type="file" onChange={onFileChange} />
-      <button onClick={onFileUpload}>Upload</button>
-      <p>{message}</p>
-    </div>
-  );
-}
+    return (
+        <div className="file">
+            <input type="file" onChange={onFileChange} style={{ marginBottom: '10px', padding: '5px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '1px' }} />
+            <button onClick={onFileUpload} style={{ marginBottom: '10px', padding: '10px', backgroundColor: '#ddd', color: 'black', border: 'none', borderRadius: '5px' }}>Upload</button>
+            <p>{message}</p>
+        </div>
+    );
+};
 
-export default UploadFile;
+export default FileUpload;

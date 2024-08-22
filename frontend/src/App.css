@@ -3,8 +3,68 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 20vmin;
   pointer-events: none;
+  margin-right: 50em;
+}
+/* Estilos generales para la tabla */
+.table-container {
+  width: 100%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  box-shadow: 0 0 20px rgba(226, 222, 222, 0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Estilo para el encabezado de la tabla */
+thead th {
+  background-color: #448646; /* Color de fondo del encabezado */
+  color: white; /* Color del texto */
+  padding: 10px;
+  text-align: left;
+  font-size: 16px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Estilo para las filas de la tabla */
+tbody tr:nth-child(even) {
+  background-color: #131212; /* Color de fondo para filas pares */
+  color: rgb(34, 32, 32); /* Color del texto */
+}
+
+tbody tr:hover {
+  background-color: #1b1b1b; /* Color de fondo al pasar el mouse */
+  color: rgb(34, 32, 32); /* Color del texto */
+}
+
+/* Estilo para las celdas de la tabla */
+tbody td {
+  background-color: #c7f7c7; /* Color de fondo al pasar el mouse */
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  color: #0a0a0a;
+}
+
+/* Estilo para los botones de imágenes */
+button.img-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  margin: 0 5px;
+}
+
+button.img-btn img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -14,7 +74,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #ccf1cc;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -23,9 +83,14 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.file{
+  padding: 0.5em 0.5em;
+  min-height: 10vh;
+  background-color: rgb(132, 206, 128);
+  color: #070707;
+}
 .App-link {
-  color: #61dafb;
+  color: #057518;
 }
 
 @keyframes App-logo-spin {

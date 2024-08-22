@@ -1,6 +1,7 @@
-import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
 import UploadFile from './components/UploadFile';
+import DataGrid from './components/DataGrid';
 function App() {
   return (
     <div className="App">
@@ -11,6 +12,7 @@ function App() {
         </p>
         <div>
       <UploadFile />
+      <DataGrid/>
     </div>
       </header>
     </div>
