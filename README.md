@@ -1,4 +1,7 @@
 # project-code-pdf
+ ![image](https://github.com/user-attachments/assets/bd231a32-20bc-4c36-ad12-21ac363a5fbb)
+
+
 Configura el proyecto con un frontend en React y un backend en Node.js que se conecte a MongoDB. Asegúrate de que tienes instalado Node.js, MongoDB, y una biblioteca para manejar archivos PDF como pdf-lib.
 Organiza el proyecto con las siguientes carpetas y archivos:
 Estructura del proyecto
