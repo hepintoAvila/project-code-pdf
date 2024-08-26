@@ -4,12 +4,11 @@ const pdfRoutes = require('./routes/pdf');
 const cors = require('cors');
 const path = require('path');
 const { exec } = require('child_process');  // Importa el módulo child_process
+const { auth } = require('express-oauth2-jwt-bearer');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
-console.log('PORT', PORT);
-
+ 
 function connectToMongoDB() {
   mongoose.connect('mongodb://localhost:27017/pdfdb')
     .then(() => {
@@ -38,14 +37,31 @@ function connectToMongoDB() {
       }
     });
 }
-
 // Conecta a MongoDB
 connectToMongoDB();
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+const jwtCheck = auth({
+  audience: 'https://api.certificados.com',
+  issuerBaseURL: 'https://dev-twjztmiqhzxp7q86.us.auth0.com/',
+  tokenSigningAlg: 'RS256'
+});
 
+
+app.use(express.json());
+app.use(cors());
+// enforce on all endpoints
+app.use(jwtCheck);
+app.use((req, res, next) => {
+  console.log('Authorization Header:', req.headers.authorization);
+  next();
+});
+// Middleware
+app.get('/authorized', function (req, res) {
+  res.send('Secured Resource');
+});
+app.get('/api/permissions', (req, res) => {
+  res.json({ permissions: ['read', 'write'] });
+});
 // Rutas api/pdf/upload
 app.use('/api/pdf', pdfRoutes);
 app.use('/api/pdf/uploads', express.static(path.join(__dirname, 'uploads')));
